@@ -60,8 +60,20 @@ class Pedidos extends Component {
                     </tr>
                   </thead>
                   {pedidos}
+                  <tfoot>
+                    <tr>
+                         <td>
+                         <input type="text" id="ejemplo" name="ejemplo" placeholder="Nombre del Cliente"></input>
+                         </td>
+                        <td>
+                        Total S/. {pedidosProps.reduce((acum, element) => acum + (element.quantity * element.price), 0)}
+                        </td>
+                    </tr>
+                 </tfoot>
                 </table>
-
+                <button className="btn btn-primary">
+                    Enviar a cocina
+                </button>
          </div>
       )
     }
