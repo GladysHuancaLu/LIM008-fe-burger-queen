@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import firebase from 'firebase'
+// import firebase from 'firebase'
 
 // subcomponents
 import MenuList from './components/MenuList.js';
@@ -57,14 +57,14 @@ class App extends Component {
   //     });
   // }
 
-   handleClick = (e) => {
-    e.preventDefault();
-    const pedidos=this.state.pedidos;
-    const db = firebase.firestore();
-    db.collection('pedidos').add( pedidos );
-    // setClientsName('');
-    // setOrderItems([]);
-  };
+  //  handleClick = (e) => {
+  //   e.preventDefault();
+  //   const pedidos=this.state.pedidos;
+  //   const db = firebase.firestore();
+  //   db.collection('pedidos').add( pedidos );
+  //   // setClientsName('');
+  //   // setOrderItems([]);
+  // };
 
   handleAddTodo = (todo) => {
     this.setState({
