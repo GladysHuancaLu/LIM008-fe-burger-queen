@@ -71,8 +71,8 @@ class Pedidos extends Component {
                     </tr>
                  </tfoot>
                 </table>
-                <button className="btn btn-primary">
-                    Enviar a cocina
+                <button className="btn btn-primary" onClick={() => this.props.handleClick} >
+                    Enviar a cocina handleClick
                 </button>
          </div>
       )

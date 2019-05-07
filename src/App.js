@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-// import firebase from 'firebase'
+import firebase from 'firebase'
 
 // subcomponents
 import MenuList from './components/MenuList.js';
@@ -8,27 +8,33 @@ import Navbar from './components/Navbar.js';
 import Pedidos from './components/Pedidos';
 
 
-// const config = {
-//   apiKey: "AIzaSyA2junqwJNf7EV4x_g8cVySpctsyppiit8",
-//   authDomain: "mi-fabuloso-burger.firebaseapp.com",
-//   databaseURL: "https://mi-fabuloso-burger.firebaseio.com",
-//   projectId: "mi-fabuloso-burger",
-//   storageBucket: "mi-fabuloso-burger.appspot.com",
-//   messagingSenderId: "1022205186885"
-// };
-// firebase.initializeApp(config);
-
-// const db = firebase.firestore();
-// const settings = {/* your settings... */ timestampsInSnapshots: true };
-// db.settings(settings);
-
-
 class App extends Component {
-  constructor() {
-    super();
+  constructor (props) {
+    super(props);
     this.state = {
-      pedidos:[],
-    }
+      menu: [],
+      options: "desayuno",
+      pedidos: []
+    };
+  }
+
+
+
+  componentDidMount() {
+    fetch('https://raw.githubusercontent.com/luanazevallos/LIM008-fe-burger-queen/develop/src/menu.json')
+      .then(res => res.json())
+      .then((json) => {
+        this.setState({
+          menu: json,
+        });
+      });
+  }
+
+  mostrarMenuElegido = (e) => {
+    const {value} = e.target;
+    this.setState({
+      options: value
+    });
   }
 
   // handleClick = () => {
@@ -51,6 +57,15 @@ class App extends Component {
   //     });
   // }
 
+   handleClick = (e) => {
+    e.preventDefault();
+    const pedidos=this.state.pedidos;
+    const db = firebase.firestore();
+    db.collection('pedidos').add( pedidos );
+    // setClientsName('');
+    // setOrderItems([]);
+  };
+
   handleAddTodo = (todo) => {
     this.setState({
       pedidos: [...this.state.pedidos, todo],
@@ -67,6 +82,7 @@ class App extends Component {
 
   render() {
     // RETURN THE COMPONENT
+    console.log(this.state.pedidos)
     return (
       <div className="App">
         <div>
@@ -76,11 +92,11 @@ class App extends Component {
           <div className="row mt-8">
 
             <div className="col-md-8 text-center">
-              <MenuList onAddTodo={this.handleAddTodo}></MenuList>
+              <MenuList onAddTodo={this.handleAddTodo}  mostrarMenuElegido={this.mostrarMenuElegido} menu={this.state.menu} options={this.state.options}></MenuList>
             </div>
 
             <div className="col-md-4" >
-              <Pedidos coleccionPedidos={this.state.pedidos} eliminar= {this.removeTodo}/>
+              <Pedidos coleccionPedidos={this.state.pedidos} eliminar= {this.removeTodo} handleClick={this.handleClick}/>
             </div>
           </div>
         </div>

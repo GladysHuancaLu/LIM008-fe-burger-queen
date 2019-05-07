@@ -1,33 +1,12 @@
 import React, { Component } from 'react';
 
 class MenuList extends Component {
-  constructor () {
-    super();
-    this.state = {
-      menu: [],
-      options: "desayuno"
-    };
-  }
 
-  componentDidMount() {
-    fetch('https://raw.githubusercontent.com/luanazevallos/LIM008-fe-burger-queen/develop/src/menu.json')
-      .then(res => res.json())
-      .then((json) => {
-        this.setState({
-          menu: json,
-        });
-      });
-  }
-
-  mostrarMenuElegido = (e) => {
-    const {value} = e.target;
-    this.setState({
-      options: value
-    });
-  }
 
   render() {
-      const menu = this.state.menu.filter(item => item.category === this.state.options).map((menuIndividual, i)=>{
+    let prueba = this.props.menu;
+
+      const menu = prueba.filter(item => item.category === this.props.options).map((menuIndividual, i)=>{
       return(
         <div className="col-md-8" key={i}>
             <div className="card-title text-center">
@@ -48,14 +27,14 @@ class MenuList extends Component {
           <button
               className = "btn btn-primary"
               value = "desayuno"
-              onClick={this.mostrarMenuElegido}
+              onClick={this.props.mostrarMenuElegido}
               >
               Desayuno
           </button>
           <button
               className = "btn btn-primary"
               value = "resto del dia"
-              onClick={this.mostrarMenuElegido}
+              onClick={this.props.mostrarMenuElegido}
               >
               Resto del dia
           </button>
