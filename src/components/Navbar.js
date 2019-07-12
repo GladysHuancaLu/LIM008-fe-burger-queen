@@ -8,7 +8,7 @@ class Navbar extends Component {
       return (
         <nav className="navbar navbar-dark navegacion">
           <a className="navbar-brand" href="/">
-            Burguer Queen :P server del
+            Burguer Queen 
             <span className="badge badge-pill badge-light ml-2">
               {/* {this.state.pedidos.length} */}
             </span>

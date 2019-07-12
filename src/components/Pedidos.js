@@ -2,12 +2,6 @@ import React, { Component } from 'react';
 import '../App.css';
 
 class Pedidos extends Component {
-  constructor() {
-    super();
-    this.state = {
-      pedidos:[]
-    }
-  }
 
     render() {
       let pedidosProps = this.props.coleccionPedidos;
@@ -20,22 +14,11 @@ class Pedidos extends Component {
                 <th scope="row">{pedido.title}</th>
                 <td>{pedido.quantity}
                 <button 
-                onClick={() => {
-                  // console.log(pedidosProps)
-                  pedido.quantity += 1;
-                  this.setState({
-                    pedidos: [...this.state.pedidos],
-                  })
-                }}>
+                onClick={() => {this.props.add(pedido)}}>
                 +
                 </button>
                 <button 
-                onClick={() => {
-                  pedido.quantity -= 1;
-                  this.setState({
-                    pedidos: [...this.state.pedidos],
-                  })
-                }}>
+                onClick={() => {this.props.subtract(pedido)}}>
                 -
                 </button>
                 </td>
@@ -63,7 +46,7 @@ class Pedidos extends Component {
                   <tfoot>
                     <tr>
                          <td>
-                         <input type="text" id="ejemplo" name="ejemplo" placeholder="Nombre del Cliente"></input>
+                         <input onChange={this.props.updateNameClient} type="text" id="ejemplo" name="ejemplo" placeholder="Nombre del Cliente"></input>
                          </td>
                         <td>
                         Total S/. {pedidosProps.reduce((acum, element) => acum + (element.quantity * element.price), 0)}
@@ -71,7 +54,7 @@ class Pedidos extends Component {
                     </tr>
                  </tfoot>
                 </table>
-                <button className="btn btn-primary">
+                <button onClick={() => {this.props.addOrderToFirebase(pedidosProps)}} className="btn btn-primary">
                     Enviar a cocina
                 </button>
          </div>
