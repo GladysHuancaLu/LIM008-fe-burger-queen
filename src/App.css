@@ -1,6 +1,8 @@
 body {
-  background-color: #FFE4E1
+  background-color: #FFE4E1;
+  font-size : 25px
 }
+
 .card {
   background-color: #FFE4E1
 
@@ -22,7 +24,6 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
 }
 
@@ -46,5 +47,11 @@ body {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 1400px) {
+  .boton {
+    font-size: 25px;
   }
 }
